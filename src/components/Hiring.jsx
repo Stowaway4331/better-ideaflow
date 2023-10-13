@@ -14,8 +14,8 @@ const Hiring = () => {
           <p>Help us extend the human mind.</p>
           <Button bgColor="black"><span className="text-white">Join us or refer someone</span></Button>
         </div>
-        <Blob color={'white'} className={`absolute w-2/3 h-2/3 top-1/2 left-[35%] -translate-x-1/2 -translate-y-1/2 inset-0 -z-10`} />
-        <Blob color={'#00c8ce'} className={`absolute w-2/3 h-2/3 top-1/2 left-[65%] -translate-x-1/2 -translate-y-1/2 inset-0 -z-10 rotate-180`} />
+        <Blob duration={2000} color={'white'} className={`absolute w-2/3 h-2/3 top-1/2 left-[35%] -translate-x-1/2 -translate-y-1/2 inset-0 -z-10`} />
+        <Blob duration={3000} color={'#00c8ce'} className={`absolute w-2/3 h-2/3 top-1/2 left-[65%] -translate-x-1/2 -translate-y-1/2 inset-0 -z-10 rotate-180`} />
       </div>
     </Reveal>
   );
