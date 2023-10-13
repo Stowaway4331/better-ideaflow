@@ -14,7 +14,7 @@ const App = () => {
   return (
     <div className="flex flex-col items-center">
       <Header />
-      <div className="pt-12 px-8 flex flex-col items-center max-w-5xl justify-center">
+      <div className="pt-12 px-8 flex flex-col items-center max-w-5xl justify-center gap-80">
         <div className="mt-20 flex flex-col justify-center items-center">
           <Hero />
           <NotesLinks />
@@ -22,13 +22,13 @@ const App = () => {
         <div className="">
           <BackedBy />
         </div>
-        <div className="mb-60">
+        <div className="">
           <Hero2 />
         </div>
-        <div className="mb-44">
+        <div className="">
           <Founders />
         </div>
-        <div className="mb-40">
+        <div className="">
           <Hiring />
         </div>
       </div>
