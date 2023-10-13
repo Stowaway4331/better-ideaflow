@@ -2,56 +2,51 @@ import React from "react";
 import FirstRoundLogo from "../assets/first round.png";
 import EightVCLogo from "../assets/8vc white.png";
 import StartXLogo from "../assets/startx.png";
-import { cubicBezier, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const BackedBy = () => {
-  const logos = [FirstRoundLogo, EightVCLogo, StartXLogo, FirstRoundLogo];
-  const logosAltText = ["first round", "8vc", "startx", "first round"];
-  const opacityValues = [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]];
+  // const logos = [FirstRoundLogo, EightVCLogo, StartXLogo, FirstRoundLogo];
+  const logosAltText = ["first round", "8vc", "startx"];
 
-  const timingFunction = cubicBezier(0.67, 1, 0.33, 1)
+  const logos = [FirstRoundLogo, EightVCLogo, StartXLogo];
 
   return (
     <div className="flex flex-col items-center relative gap-8">
-      <div className="bg-black w-full h-80"></div>
       <h2 className="text-4xl text-center">
         Backed by world-class investors and partners
       </h2>
-      <div className="text-4xl flex -z-10 top-16">
-        <motion.span
-          className="flex flex-col w-48"
-          animate={{
-            translateY: ["0%", "-25%", "-50%", "-75%"],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            delay: 0.25,
-          }}
-        >
+      <div className="flex items-center justify-center">
+        <div className="top-16 -z-10 grid text-4xl">
           {logos.map((logo, index) => {
             return (
               <motion.div
                 key={index}
-                className="flex justify-center p-4 h-24 bg-black -translate-y-1/4"
+                className="col-start-1 row-start-1 w-64 justify-center"
+                initial={{ opacity: 0, translateY: "75%" }}
                 animate={{
-                  opacity: opacityValues[index],
+                  opacity: [null, 1, 0],
+                  translateY: [null, "0%", "-75%"],
                 }}
                 transition={{
-                  duration: 6,
+                  duration: 3,
+                  ease: "easeInOut",
                   repeat: Infinity,
-                  delay: 0,
-                  ease: timingFunction,
+                  delay: index * 1.5,
+                  repeatDelay: logos.length * 1.5 - 3, // `total delay - duration` (the time the first item should return back to initial style)
                 }}
               >
-                <img src={logo} alt={logosAltText[index]} className="h-full" />
+                <div
+                  className="h-20 flex justify-center"
+                  style={{ backgroundColor: logo }}
+                >
+                  <img src={logo} alt={logosAltText[index]} />
+                </div>
               </motion.div>
             );
           })}
-        </motion.span>
-        <div>+33 more</div>
+        </div>
+        <span className="text-4xl text-center">+33 more</span>
       </div>
-      <div className="bg-black w-full h-80 absolute bottom-0"></div>
     </div>
   );
 };
