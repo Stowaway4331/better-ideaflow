@@ -4,7 +4,7 @@ import TitleCard from "../controllers/TitleCard";
 
 const Footer = () => {
   return (
-    <div className="grid grid-flow-row md:grid-flow-col w-full max-w-7xl p-12 gap-4">
+    <div className="grid grid-flow-row md:grid-flow-col w-full max-w-7xl p-12 gap-4 mt-40">
       <div className="">
         <img src={Logo} alt="logo" className="h-16 w-full md:w-max object-contain" />
       </div>
