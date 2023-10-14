@@ -6,6 +6,9 @@ import Reveal from "../controllers/Reveal";
 import TitleCard from "../controllers/TitleCard";
 import Button from "../controllers/Button";
 
+import ani1_placeholder from "../assets/animation1_placeholder.jpg"
+import ani2_placeholder from "../assets/animation2_placeholder.jpg"
+
 const Hero2 = () => {
   return (
     <div className="flex flex-col items-center gap-24">
@@ -36,7 +39,7 @@ const Hero2 = () => {
           </Reveal>
           <Reveal>
             <div className="w-full aspect-square ">
-              <Lottie className="h-full" animationData={ani1} loop={true} />
+              <Lottie className="h-full" placeholder={ani1_placeholder} autoplay={true} animationData={ani1} loop={true} />
             </div>
           </Reveal>
         </div>
@@ -46,7 +49,7 @@ const Hero2 = () => {
         <div className="flex flex-col flex-col-reverse md:grid md:grid-cols-2 md:grid-rows-1 items-center">
           <Reveal>
             <div className="w-full aspect-square ">
-              <Lottie animationData={ani2} loop={true} />
+              <Lottie placeholder={ani2_placeholder} animationData={ani2} autoplay={true} loop={true} />
             </div>
           </Reveal>
           <Reveal>
