@@ -7,7 +7,7 @@ const Hiring = () => {
   return (
     <Reveal>
       <div className="aspect-square text-black p-12 relative">
-        <div className="flex flex-col items-center justify-center h-full gap-4 mix-blend-multiply">
+        <div className="flex flex-col items-center justify-center h-full gap-4">
           <h1 className="capitalize text-4xl font-bold">
             we&apos;re hiring key roles
           </h1>
