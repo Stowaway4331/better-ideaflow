@@ -2,7 +2,7 @@ import React from "react";
 
 import PropTypes from 'prop-types';
 
-const Button = ({bgColor, children }) => {
+const Button = ({bgColor="00c8ce", children }) => {
   return (
     <button className={`bg-[${bgColor}] bg-${bgColor} min-w-20 w-max px-4 py-2 rounded-md text-[0.75em] font-bold cursor-pointer text-black hover:scale-105 transition-all`}>
       {children}
