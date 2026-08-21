@@ -1,48 +1,46 @@
-import React, { useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 import PropTypes from "prop-types";
+
+const SIZE_CLASSES = {
+  "7xl": "text-5xl md:text-7xl",
+  "6xl": "text-4xl md:text-6xl",
+  "5xl": "text-4xl md:text-5xl",
+  "4xl": "text-3xl md:text-4xl",
+  "2xl": "text-2xl",
+  xl: "text-xl",
+  lg: "text-lg",
+  md: "text-base",
+};
 
 const TitleCard = ({
   animation = true,
   title,
   titleWeight = "normal",
   titleSize = "6xl",
+  gradient = false,
   children,
 }) => {
-
-  const ref = useRef(null);
-  const isInView = useInView(ref, {once: true})
-
-  const mainControlls = useAnimation();
-
-  useEffect(() => {
-    if(isInView) {
-      mainControlls.start("final")
-    }
-  })
-
   return (
-    <div className="">
+    <div>
       <h1
-        className={`text-${titleSize} text-left whitespace-pre-line`}
+        className={`${SIZE_CLASSES[titleSize] ?? "text-4xl"} text-left whitespace-pre-line leading-tight ${
+          gradient ? "text-gradient" : ""
+        }`}
         style={{ fontWeight: `${titleWeight}` }}
       >
         {title}
       </h1>
       {animation && (
         <motion.div
-          ref={ref}
-          className="my-8 border-b-[1px] rounded-full"
-          variants={{
-            initial: { width: "0%" },
-            final: { width: "100%" },
-          }}
-          initial="initial"
-          animate={mainControlls}
+          className="my-8 h-px rounded-full bg-gradient-to-r from-accent via-accent/40 to-transparent origin-left"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
           transition={{
-            duration: 1,
-            delay: 0.5
+            duration: 0.9,
+            delay: 0.3,
+            ease: [0.16, 1, 0.3, 1],
           }}
         ></motion.div>
       )}
@@ -56,6 +54,7 @@ TitleCard.propTypes = {
   title: PropTypes.string.isRequired,
   titleWeight: PropTypes.string,
   titleSize: PropTypes.string,
+  gradient: PropTypes.bool,
   children: PropTypes.node,
 };
 

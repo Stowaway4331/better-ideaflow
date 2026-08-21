@@ -1,79 +1,42 @@
-import React, { useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
+const linkText = ["Try Ideaflow Notes", "iOS", "Guide", "Twitter", "Newsletter"];
+
 const NotesLinks = () => {
-  const linkText = ["Try Ideaflow Notes", "iOS", "Guide", "Twitter", "Newsletter"];
-
-  useEffect(() => {
-
-    const activeColor = window.innerWidth > 768 ? "black" : "white"
-
-    const blob = document.querySelector(".blob");
-
-    const notesLinks = document.querySelectorAll(".noteslink");
-
-    colorAll(0);
-
-    notesLinks.forEach((link, index) => {
-      link.addEventListener("mouseenter", () => {
-        blob.style.transform = `translateX(${
-          link.getBoundingClientRect().width * index
-        }px)`;
-
-        link.querySelector("span").style.color = activeColor;
-
-        colorAll(index)
-      });
-    });
-
-    notesLinks.forEach((link) => {
-      link.addEventListener("mouseleave", () => {
-        blob.style.transform = "translateX(0px)";
-
-        colorAll(0)
-      });
-
-      // if(index !== 0) link.querySelector('span').style.color = '#00c8ce';
-      // else link.querySelector('span').style.color = 'white';
-    });
-
-    function colorAll(flag) {
-      notesLinks.forEach((link, index) => {
-        link.querySelector("span").style.color = "#00c8ce";
-        if(index === flag) 
-        link.querySelector("span").style.color = activeColor;
-      })
-    }
-  }, []);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="w-full md:flex md:justify-between md:items-center mb-4">
-      {linkText.map((ele, k) => {
+    <div className="w-full flex flex-wrap md:flex-nowrap md:justify-between md:items-center gap-2 mb-4">
+      {linkText.map((label, index) => {
+        const isActive = index === activeIndex;
         return (
-          <motion.div
-            className="w-full"
+          <motion.a
+            key={label}
             href="#"
-            key={k}
-            variants={{
-              hidden: { opacity: 0, x: -25 },
-              visible: { opacity: 1, x: 0 },
-            }}
-            initial="hidden"
-            animate="visible"
-            transition={{
-              delay: 0.2 * k + 0.5,
-            }}
+            className="relative w-full py-2.5 flex justify-center items-center rounded-full"
+            initial={{ opacity: 0, y: -16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.08 * index + 0.4, ease: [0.16, 1, 0.3, 1] }}
+            onMouseEnter={() => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(0)}
           >
-            <a
-              className="noteslink relative w-full py-2 flex justify-center items-center rounded-sm /bg-[#00c8ce]"
-              href="#"
+            {isActive && (
+              <motion.span
+                layoutId="notes-blob"
+                className="hidden md:block absolute inset-0 rounded-full bg-accent"
+                transition={{ type: "spring", stiffness: 350, damping: 30 }}
+              />
+            )}
+            <span
+              className={`relative z-10 font-semibold text-sm transition-colors duration-300 ${
+                isActive ? "text-white md:text-black" : "text-accent"
+              }`}
             >
-              {k === 0 && (
-                <div className="hidden md:block blob bg-[#00c8ce] rounded-md absolute w-full h-full -z-10 transition-transform duration-500"></div>
-              )}
-              <span className={`text-[${k === 0 ? "black" : "#00c8ce"}] transition-colors duration-500 font-[600]`}>{ele}</span>
-            </a>
-          </motion.div>
+              {label}
+            </span>
+          </motion.a>
         );
       })}
     </div>

@@ -1,42 +1,27 @@
-import React, { useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 import PropTypes from "prop-types";
 
-const Reveal = ({ children }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
-  const mainControlls = useAnimation();
-
-  useEffect(() => {
-    if (isInView) {
-      mainControlls.start("visible");
-    }
-  }, [isInView]);
-
+const Reveal = ({ children, delay = 0 }) => {
   return (
-    <div ref={ref} className="relative">
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, y: 75 },
-          visible: { opacity: 1, y: 0 },
-        }}
-        initial="hidden"
-        animate={mainControlls}
-        transition={{
-          duration: 1,
-          delay: 0.25,
-        }}
-      >
-        {children}
-      </motion.div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 60, filter: "blur(6px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 0.9,
+        delay,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+    >
+      {children}
+    </motion.div>
   );
 };
 
 Reveal.propTypes = {
   children: PropTypes.node.isRequired,
+  delay: PropTypes.number,
 };
 
 export default Reveal;
